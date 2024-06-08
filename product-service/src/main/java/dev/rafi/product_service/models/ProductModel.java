@@ -1,0 +1,24 @@
+package dev.rafi.product_service.models;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.math.BigDecimal;
+
+@Document(value = "Product")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
+public class ProductModel {
+
+    @Id
+    private String id;
+    private String name;
+    private String description;
+    private BigDecimal price;
+}
