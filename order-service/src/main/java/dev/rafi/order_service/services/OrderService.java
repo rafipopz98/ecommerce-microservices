@@ -7,17 +7,20 @@ import dev.rafi.order_service.model.OrderModel;
 import dev.rafi.order_service.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
 
-    public void placeOrder(OderRequest orderRequest){
+
+    public void placeOrder(OderRequest orderRequest) {
         OrderModel order = new OrderModel();
         order.setOrderNumber(UUID.randomUUID().toString());
 
@@ -28,7 +31,8 @@ public class OrderService {
         order.setOrderLineItemsList(orderLineItemList);
         orderRepository.save(order);
     }
-    private OrderLineItem mapToDto(OrderLineItemDTO orderLineItemDTO){
+
+    private OrderLineItem mapToDto(OrderLineItemDTO orderLineItemDTO) {
         OrderLineItem orderLineItem = new OrderLineItem();
         orderLineItem.setPrice(orderLineItemDTO.getPrice());
         orderLineItem.setQuantity(orderLineItemDTO.getQuantity());
